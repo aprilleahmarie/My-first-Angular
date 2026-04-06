@@ -1,0 +1,32 @@
+<!-- PRODUCT HTML -->
+
+<main>
+  <h2 class="section-title">Popular Manhwa Books</h2>
+
+  <h4>Total: ₱{{ totalPay }}</h4>
+  <h4>Items in Cart: {{ totalItems }}</h4>
+  <br>
+  <br>
+  <br>
+  <div class="cart" *ngIf="cart.length > 0">
+    <h3>Cart Items</h3>
+    <div *ngFor="let item of cart">
+      <p>
+        {{ item.name }} (x{{ item.quantity }}) - ₱{{ item.price * item.quantity }}
+        <button (click)="removeFromCart(item)">Remove</button>
+      </p>
+    </div>
+    <button (click)="clearCart()">Clear Cart</button>
+  </div>
+
+  <div class="card-container">
+    <div class="card" *ngFor="let product of products">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.type }}</p>
+      <p class="price">₱{{ product.price }}</p>
+      <p class="stock" *ngIf="product.stock > 0">Stock: {{ product.stock }}</p>
+      <p class="stock" *ngIf="product.stock === 0" style="color:red;">Out of Stock</p>
+      <button (click)="addToCart(product)" [disabled]="product.stock === 0">Add to Cart</button>
+    </div>
+  </div>
+</main>
